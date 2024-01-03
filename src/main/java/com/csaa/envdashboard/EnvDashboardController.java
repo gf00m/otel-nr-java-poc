@@ -7,7 +7,10 @@ import java.net.URISyntaxException;
 import java.util.Base64;
 import java.util.Objects;
 
-import io.micrometer.tracing.Tracer;
+
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.Tracer;
+import io.opentelemetry.context.Scope;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -45,7 +48,9 @@ public class EnvDashboardController {
 
     @GetMapping("/")
     public ResponseEntity< String > index(Model model) throws URISyntaxException, IOException {
-        this.restTemplate.getForObject("http://localhost:8090/env-dashboard/triggerBuild", String.class);
+        Span span = Span.current();
+        Span.current().updateName("landing-page");
+        span.setAttribute("method-name","landing-page");
         model.addAttribute("environments", envConfigService.getEnvNames());
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Access-Control-Allow-Methods", "GET,POST,OPTIONS");

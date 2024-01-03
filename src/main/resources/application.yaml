@@ -21,8 +21,8 @@ spring:
         database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 tracing:
-    url: 
-    authCode: 
+    url: https://otlp.nr-data.net:443
+    authCode: 521e73ff57f3f750e78e265f181c750aFFFFNRAL
 
 management:
     tracing:

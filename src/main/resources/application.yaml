@@ -22,7 +22,7 @@ spring:
 
 tracing:
     url: https://otlp.nr-data.net:443
-    authCode: 521e73ff57f3f750e78e265f181c750aFFFFNRAL
+    authCode:
 
 management:
     tracing:
